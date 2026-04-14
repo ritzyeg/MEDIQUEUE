@@ -29,7 +29,7 @@ The current prototype uses a structured sample dataset based on realistic outpat
 - Simulated token flow using current token, average consultation time, and doctor availability
 
 ## Why This Idea Was Chosen
-We chose this idea because many patients face uncertainty before hospital visits. They may not know which department to choose, how long they may need to wait, or whether another time slot or nearby hospital could reduce the waiting time. MediQueue aims to improve hospital visit planning and reduce unnecessary OP crowding from the patient side.
+I chose this idea because many patients face uncertainty before hospital visits. They may not know which department to choose, how long they may need to wait, or whether another time slot or nearby hospital could reduce the waiting time. MediQueue aims to improve hospital visit planning and reduce unnecessary OP crowding from the patient side.
 
 ## Deployment
 - **Repository Link:** https://github.com/ritzyeg/MEDIQUEUE
