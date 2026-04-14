@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediQueue | Intelligent OP Queue & Visit Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-top">
+        <span class="hero-chip">Smart Hospital Queue Prediction</span>
+        <span class="hero-chip secondary">Patient Visit Assistant</span>
+      </div>
+      <h1>MediQueue</h1>
+      <p class="hero-subtitle">
+        Smart OP waiting-time prediction and visit planning
+      </p>
+      <p class="hero-description">
+        A patient-friendly web platform that helps users choose the right department,
+        estimate OP waiting time, compare hospitals, find the best time to visit,
+        estimate token-based waiting, and prepare better before leaving for the hospital.
+      </p>
+    </header>
+
+    <main class="dashboard-layout">
+      <!-- LEFT: INPUT -->
+      <section class="panel intake-panel">
+        <div class="panel-header">
+          <h2>Patient Visit Input</h2>
+          <p>Enter visit details to get a smart recommendation before going to the hospital</p>
+        </div>
+
+        <form id="intakeForm">
+          <div class="grid-2">
+            <div class="field">
+              <label for="hospital">Hospital</label>
+              <select id="hospital" required>
+                <option value="">Select hospital</option>
+                <option value="Caritas Hospital, Kottayam">Caritas Hospital, Kottayam</option>
+                <option value="Bharath Hospital, Kottayam">Bharath Hospital, Kottayam</option>
+                <option value="Mar Sleeva Medicity, Palai">Mar Sleeva Medicity, Palai</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="visitType">Visit Type</label>
+              <select id="visitType" required>
+                <option value="">Select visit type</option>
+                <option value="First Visit">First Visit</option>
+                <option value="Follow-up">Follow-up</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="field">
+              <label for="ageGroup">Age Group</label>
+              <select id="ageGroup" required>
+                <option value="">Select age group</option>
+                <option value="Pediatric">Pediatric (0-12)</option>
+                <option value="Teen">Teen (13-17)</option>
+                <option value="Adult">Adult (18-59)</option>
+                <option value="Senior">Senior (60+)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="patientCategory">Patient Category</label>
+              <select id="patientCategory" required>
+                <option value="">Select category</option>
+                <option value="General">General</option>
+                <option value="Senior Priority">Senior Priority</option>
+                <option value="Pediatric Priority">Pediatric Priority</option>
+                <option value="Reduced Mobility">Reduced Mobility</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="consultWindow">Preferred Time Slot</label>
+              <select id="consultWindow" required>
+                <option value="">Select time slot</option>
+                <option value="morning">Morning (9 AM - 12 PM)</option>
+                <option value="afternoon">Afternoon (1 PM - 4 PM)</option>
+                <option value="evening">Evening (5 PM - 8 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="chiefComplaint">Main Symptom</label>
+              <select id="chiefComplaint" required>
+                <option value="">Select main symptom</option>
+                <option value="Fever">Fever</option>
+                <option value="Cough">Cough</option>
+                <option value="Ear Pain">Ear Pain</option>
+                <option value="Joint Pain">Joint Pain</option>
+                <option value="Skin Rash">Skin Rash</option>
+                <option value="Stomach Pain">Stomach Pain</option>
+                <option value="Chest Pain">Chest Pain</option>
+                <option value="Breathlessness">Breathlessness</option>
+                <option value="Headache">Headache</option>
+                <option value="Eye Irritation">Eye Irritation</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="associatedSymptom">Additional Symptom</label>
+              <select id="associatedSymptom">
+                <option value="">None</option>
+                <option value="Fever">Fever</option>
+                <option value="Cough">Cough</option>
+                <option value="Ear Pain">Ear Pain</option>
+                <option value="Joint Pain">Joint Pain</option>
+                <option value="Skin Rash">Skin Rash</option>
+                <option value="Stomach Pain">Stomach Pain</option>
+                <option value="Chest Pain">Chest Pain</option>
+                <option value="Breathlessness">Breathlessness</option>
+                <option value="Headache">Headache</option>
+                <option value="Eye Irritation">Eye Irritation</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="field">
+              <label for="intensity">Symptom Severity</label>
+              <select id="intensity" required>
+                <option value="">Select severity</option>
+                <option value="Mild">Mild</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Severe">Severe</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="duration">Symptom Duration</label>
+              <select id="duration" required>
+                <option value="">Select duration</option>
+                <option value="1 day">1 day</option>
+                <option value="2-3 days">2-3 days</option>
+                <option value="4-7 days">4-7 days</option>
+                <option value="1+ week">1+ week</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="mobilitySupport">Need Mobility Support?</label>
+              <select id="mobilitySupport" required>
+                <option value="">Select option</option>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="field">
+              <label for="yourToken">Current Token (Optional)</label>
+              <input type="number" id="yourToken" min="1" placeholder="If hospital already gave a token" />
+            </div>
+
+            <div class="field">
+              <label for="travelTime">Travel Time (mins)</label>
+              <input type="number" id="travelTime" min="0" placeholder="e.g. 25" />
+            </div>
+
+            <div class="field">
+              <label for="arrivalFlexibility">Arrival Flexibility</label>
+              <select id="arrivalFlexibility" required>
+                <option value="">Select flexibility</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="analyze-btn">Check Waiting Time & Best Option</button>
+        </form>
+
+        <section class="recent-section">
+          <div class="section-title-row">
+            <h3>Recent Checks</h3>
+            <span class="section-tag">Saved on Device</span>
+          </div>
+          <div id="recentSessions" class="recent-list">
+            No recent checks yet.
+          </div>
+        </section>
+      </section>
+
+      <!-- RIGHT: OUTPUT -->
+      <section class="output-column">
+        <section class="panel output-panel" id="summaryPanel">
+          <div class="panel-header">
+            <h2>Visit Summary</h2>
+            <p>Main recommendation, urgency, smart action, and visit preparation checklist</p>
+          </div>
+          <div class="placeholder">
+            Fill the form to get the suggested department, waiting time, and recommended next step.
+          </div>
+        </section>
+
+        <section class="panel output-panel" id="waitPanel">
+          <div class="panel-header">
+            <h2>Waiting Time Estimate</h2>
+            <p>Estimated OP waiting time, crowd level, best time slot, and travel advice</p>
+          </div>
+          <div class="placeholder">Waiting time estimate will appear here.</div>
+        </section>
+
+        <section class="panel output-panel" id="tokenPanel">
+          <div class="panel-header">
+            <h2>Token Wait Estimator</h2>
+            <p>If a token is already assigned, estimate how many patients are ahead</p>
+          </div>
+          <div class="placeholder">Token-based waiting estimate will appear here.</div>
+        </section>
+
+        <section class="panel output-panel" id="alternativesPanel">
+          <div class="panel-header">
+            <h2>Other Hospital Options</h2>
+            <p>Compare estimated waiting times in other hospitals for the same department</p>
+          </div>
+          <div class="placeholder">Other hospital options will appear here.</div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <strong>Note:</strong> This system currently uses sample hospital load patterns and simulated token logic
+        to help users plan their OP visit better. Final accuracy can be improved by connecting with live hospital data.
+      </p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
